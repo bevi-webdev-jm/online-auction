@@ -307,18 +307,33 @@ return [
             'active'    => ['item*']
         ],
         [
-            'text'      => 'Users',
-            'url'       => 'users',
-            'icon'      => 'fas fa-fw fa-users',
-            'can'       => 'user access',
-            'active'    => ['user*']
-        ],
-        [
-            'text'      => 'Roles',
-            'url'       => 'roles',
-            'icon'      => 'fas fa-fw fa-user-lock',
-            'can'       => 'role access',
-            'active'    => ['user*']
+            'text'  => 'Settings',
+            'url'   => '#',
+            'icon'  => 'fa fa-fw fa-cog',
+            'can'   => ['user access', 'role access'],
+            'submenu' => [
+                [
+                    'text'      => 'Companies',
+                    'url'       => 'companies',
+                    'icon'      => 'fas fa-fw fa-building',
+                    'can'       => 'company access',
+                    'active'    => ['companies', 'company*']
+                ],
+                [
+                    'text'      => 'Users',
+                    'url'       => 'users',
+                    'icon'      => 'fas fa-fw fa-users',
+                    'can'       => 'user access',
+                    'active'    => ['users', 'user*']
+                ],
+                [
+                    'text'      => 'Roles',
+                    'url'       => 'roles',
+                    'icon'      => 'fas fa-fw fa-user-lock',
+                    'can'       => 'role access',
+                    'active'    => ['roles', 'role*']
+                ],
+            ],
         ],
     ],
 

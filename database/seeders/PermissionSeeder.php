@@ -23,6 +23,12 @@ class PermissionSeeder extends Seeder
                 'item edit'     => 'Allow user to edit item details.',
                 'item delete'   => 'Allow user to delete item.'
             ],
+            'Companies' => [
+                'company access'    => 'Allow user to access company list and details.',
+                'company create'    => 'Allow user to create company.',
+                'company edit'      => 'Allow user to edit company details.',
+                'company delete'    => 'Allow user to delete company.'
+            ],
             'Users' => [
                 'user access'   => 'Allow user to access user list and details',
                 'user create'   => 'Allow user to create user.',
