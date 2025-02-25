@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Auth;
+
+class GoogleController extends Controller
+{
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+            $user = User::where('email', $googleUser->email)->first();
+
+            if (!$user) {
+                $user = User::create([
+                    'name' => $googleUser->name,
+                    'email' => $googleUser->email,
+                    'password' => bcrypt(uniqid()), // Generate random password
+                    'google_id' => $googleUser->id,
+                ]);
+            }
+
+            Auth::login($user);
+
+            return redirect()->route('home'); // Redirect to dashboard
+        } catch (\Exception $e) {
+            return redirect('/login')->with('error', 'Something went wrong.');
+        }
+    }
+}

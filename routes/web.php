@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\RoleController;
 
 /*
@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function() {
 
