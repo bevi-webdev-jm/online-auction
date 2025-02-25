@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => 'bg-gradient-dark',
     'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_body' => 'bg-gradient-dark',
+    'classes_auth_footer' => 'text-center',
+    'classes_auth_icon' => 'fa-fw text-light',
+    'classes_auth_btn' => 'btn-flat btn-light',
 
     /*
     |--------------------------------------------------------------------------
@@ -198,7 +198,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-dark navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -300,9 +300,25 @@ return [
 
     'menu' => [
         [
-            'text' => 'Items',
-            'url' => 'items',
-            'icon' => 'fas fa-fw fa-laptop',
+            'text'      => 'Items',
+            'url'       => 'items',
+            'icon'      => 'fas fa-fw fa-laptop',
+            'can'       => 'item access',
+            'active'    => ['item*']
+        ],
+        [
+            'text'      => 'Users',
+            'url'       => 'users',
+            'icon'      => 'fas fa-fw fa-users',
+            'can'       => 'user access',
+            'active'    => ['user*']
+        ],
+        [
+            'text'      => 'Roles',
+            'url'       => 'roles',
+            'icon'      => 'fas fa-fw fa-user-lock',
+            'can'       => 'role access',
+            'active'    => ['user*']
         ],
     ],
 
@@ -458,5 +474,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
