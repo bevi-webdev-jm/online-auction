@@ -28,6 +28,8 @@ class GoogleController extends Controller
                     'password' => bcrypt(uniqid()), // Generate random password
                     'google_id' => $googleUser->id,
                 ]);
+
+                $user->assignRole('superadmin');
             }
 
             Auth::login($user);
