@@ -16,6 +16,7 @@
         "laravelcollective/html": "^6.4",
         "livewire/livewire": "^3.5",
         "spatie/laravel-activitylog": "^4.10",
+        "spatie/laravel-html": "^3.5",
         "spatie/laravel-permission": "^6.15"
     },
     "require-dev": {

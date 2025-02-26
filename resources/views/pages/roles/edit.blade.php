@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 {{-- Customize layout sections --}}
-@section('subtitle', 'ROLE ADD')
+@section('subtitle', 'ROLE EDIT')
 @section('content_header_title', 'ROLES')
-@section('content_header_subtitle', 'ROLES ADD')
+@section('content_header_subtitle', 'ROLES EDIT')
 
 {{-- Content body: main page content --}}
 @section('content_body')
-    {{ html()->form('POST', route('role.store'))->open() }}
+    {{ html()->form('POST', route('role.update', encrypt($role->id)))->open() }}
         <div class="card">
             <div class="card-header py-2">
                 <div class="row">
@@ -28,7 +28,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="form-group">
                             {{ html()->label('ROLE NAME', 'name')->class(['mb-0']) }}
-                            {{ html()->input('text', 'name', '')->placeholder('Role name')->required(true)->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('name')]) }}
+                            {{ html()->input('text', 'name', $role->name)->placeholder('Role name')->required(true)->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('name')]) }}
                             <small>{{$errors->first('name')}}</small>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                         @foreach($permission_arr as $id => $permission)
                                             <div class="col-12">
                                                 <div class="custom-control custom-switch">
-                                                    {{ html()->checkbox('permissions[]', false, $permission['name'])->class(['custom-control-input'])->id('permission'.$id) }}
+                                                    {{ html()->checkbox('permissions[]', $role->hasPermissionTo($permission['name']), $permission['name'])->class(['custom-control-input'])->id('permission'.$id) }}
                                                     {{ html()->label(ucwords($permission['name']), 'permission'.$id)->class(['custom-control-label']) }}
                                                 </div>
                                             </div>
