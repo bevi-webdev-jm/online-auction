@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
+
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,18 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('role/{id}/edit', [RoleController::class, 'edit'])->name('role.edit')->middleware('permission:role edit');
         Route::post('role/{id}', [RoleController::class, 'update'])->name('role.update')->middleware('permission:role edit');
+    });
+
+    // USERS ROUTES
+    Route::group(['middleware' => 'permission:user access'], function() {
+        Route::get('users', [UserController::class, 'index'])->name('user.index');
+        Route::get('user/create', [UserController::class, 'create'])->name('user.create')->middleware('permission:user create');
+        Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('permission:user create');
+
+        Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');
+
+        Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware('permission:user edit');
+        Route::post('user/{id}', [UserController::class, 'update'])->name('user.update')->middleware('permission:user edit');
     });
 
 });
