@@ -21,6 +21,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('google_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
+
+            $table->softDeletes();
         });
     }
 
