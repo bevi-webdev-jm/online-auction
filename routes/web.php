@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\GoogleController;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,18 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function() {
+
+    // COMPANIES ROUTES
+    Route::group(['middleware' => 'permission:company access'], function() {
+        Route::get('companies', [CompanyController::class, 'index'])->name('company.index');
+        Route::get('company/create', [CompanyController::class, 'create'])->name('company.create')->middleware('permission:company create');
+        Route::post('company', [CompanyController::class, 'store'])->name('company.store')->middleware('permission:company create');
+
+        Route::get('company/{id}', [CompanyController::class, 'show'])->name('company.show');
+
+        Route::get('company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit')->middleware('permission:company edit');
+        Route::post('company/{id}', [CompanyController::class, 'update'])->name('conpany.update')->middleware('permission:company edit');
+    });
 
     // ROLES ROUTES
     Route::group(['middleware' => 'permission:role access'], function() {
