@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 {{-- Customize layout sections --}}
-@section('subtitle', 'USER ADD')
+@section('subtitle', 'EDIT USER')
 @section('content_header_title', 'USERS')
-@section('content_header_subtitle', 'USER ADD')
+@section('content_header_subtitle', 'EDIT USER')
 
 {{-- Content body: main page content --}}
 @section('content_body')
@@ -12,7 +12,7 @@
             <div class="card-header py-2">
                 <div class="row">
                     <div class="col-lg-6 align-middle">
-                        <strong class="text-lg">USER ADD</strong>
+                        <strong class="text-lg">UPDATE USER</strong>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a href="{{route('user.index')}}" class="btn btn-secondary btn-xs">

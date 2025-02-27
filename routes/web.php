@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SystemLogController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,18 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function() {
+
+    // ITEMS ROUTES
+    Route::group(['middleware' => 'permission:item access'], function() {
+        Route::get('items', [ItemController::class, 'index'])->name('item.index');
+        Route::get('item/create', [ItemController::class, 'create'])->name('item.create')->middleware('permission:item create');
+        Route::post('item', [ItemController::class, 'store'])->name('item.store')->middleware('permission:item create');
+
+        Route::get('item/{id}', [ItemController::class, 'show'])->name('item.show');
+
+        Route::get('item/{id}/edit', [ItemController::class, 'edit'])->name('item.edit')->middleware('permission:item edit');
+        Route::post('item/{id}', [ItemController::class, 'update'])->name('item.update')->middleware('permission:item edit');
+    });
 
     // COMPANIES ROUTES
     Route::group(['middleware' => 'permission:company access'], function() {

@@ -5,9 +5,10 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Company;
-use Spatie\Permission\Models\Role;
+use App\Models\Item;
 
 class DeleteModel extends Component
 {
@@ -64,6 +65,11 @@ class DeleteModel extends Component
                 $this->model = Role::findOrFail($model_id);
                 $this->name = $this->model->name;
                 $this->model_route = '/roles';
+            break;
+            case 'Item':
+                $this->model = Item::findOrFail($model_id);
+                $this->name = $this->model->name;
+                $this->model_route = '/items';
             break;
         }
     }

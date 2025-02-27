@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 {{-- Customize layout sections --}}
-@section('subtitle', 'ROLE ADD')
+@section('subtitle', 'ADD ROLE')
 @section('content_header_title', 'ROLES')
-@section('content_header_subtitle', 'ROLES ADD')
+@section('content_header_subtitle', 'ADD ROLES')
 
 {{-- Content body: main page content --}}
 @section('content_body')
