@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 {{-- Customize layout sections --}}
-@section('subtitle', 'ROLE EDIT')
+@section('subtitle', 'EDIT ROLE')
 @section('content_header_title', 'ROLES')
-@section('content_header_subtitle', 'ROLES EDIT')
+@section('content_header_subtitle', 'EDIT ROLES')
 
 {{-- Content body: main page content --}}
 @section('content_body')
@@ -12,7 +12,7 @@
             <div class="card-header py-2">
                 <div class="row">
                     <div class="col-lg-6 align-middle">
-                        <strong class="text-lg">NEW ROLE</strong>
+                        <strong class="text-lg">UPDATE ROLE</strong>
                     </div>
                     <div class="col-lg-6 text-right">
                         <a href="{{route('role.index')}}" class="btn btn-secondary btn-xs">
