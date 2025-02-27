@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-12 table-responsive p-1 bg-gray rounded">
                     <table class="table table-sm table-striped table-hover bg-white mb-0">
-                        <thead class="tex-center bg-dark">
+                        <thead class="text-center bg-dark">
                             <tr class="text-center">
                                 <th>NAME</th>
                                 <th>USERS</th>

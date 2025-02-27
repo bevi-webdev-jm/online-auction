@@ -310,7 +310,7 @@ return [
             'text'  => 'Settings',
             'url'   => '#',
             'icon'  => 'fa fa-fw fa-cog',
-            'can'   => ['user access', 'role access'],
+            'can'   => ['user access', 'role access', 'company access', 'system logs'],
             'submenu' => [
                 [
                     'text'      => 'Companies',
@@ -333,6 +333,13 @@ return [
                     'can'       => 'role access',
                     'active'    => ['roles', 'role*']
                 ],
+                [
+                    'text'      => 'System Logs',
+                    'url'       => 'system-logs',
+                    'icon'      => 'fas fa-fw fa-stream',
+                    'can'       => 'system logs',
+                    'active'    => ['system-logs']
+                ]
             ],
         ],
     ],

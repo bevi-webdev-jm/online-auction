@@ -40,6 +40,9 @@ class PermissionSeeder extends Seeder
                 'role create'   => 'Allow user to create role.',
                 'role edit'     => 'Allow user to edit role details.',
                 'role delete'   => 'Allow user to delete role.'
+            ],
+            'System' => [
+                'system logs'   => 'Allow user to access system logs.'
             ]
         ];
 
