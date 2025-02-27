@@ -32,7 +32,6 @@
                             <tr class="text-center">
                                 <th>NAME</th>
                                 <th>EMAIL</th>
-                                <th>COMPANY</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -57,7 +56,7 @@
                                             </a>
                                         @endcan
                                         @can('user delete')
-                                            <a href="" class="btn btn-danger btn-xs mb-0 ml-0">
+                                            <a href="#" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($user->id)}}">
                                                 <i class="fa fa-trash-alt"></i>
                                                 DELETE
                                             </a>
@@ -85,6 +84,14 @@
 
 {{-- Push extra scripts --}}
 @push('js')
-    <script> 
+    <script>
+        $(function() {
+            $('body').on('click', '.btn-delete', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                Livewire.dispatch('setDeleteModel', {type: 'User', model_id: id});
+                $('#modal-delete').modal('show');
+            });
+        });
     </script>
 @endpush

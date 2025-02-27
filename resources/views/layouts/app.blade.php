@@ -28,6 +28,14 @@
 
 @section('content')
     @yield('content_body')
+
+
+    <!-- DELETE MODAL -->
+    <div class="modal fade" id="modal-delete">
+        <div class="modal-dialog">
+            <livewire:delete-model/>
+        </div>
+    </div>
 @stop
 
 {{-- Create a common footer --}}

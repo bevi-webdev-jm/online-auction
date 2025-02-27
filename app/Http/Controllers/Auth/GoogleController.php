@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,10 +23,13 @@ class GoogleController extends Controller
             $user = User::where('email', $googleUser->email)->first();
 
             if (!$user) {
+                $email_arr = explode('@', $googleUser->email);
+                $password = Hash::make(reset($email_arr).'123!');
+
                 $user = User::create([
                     'name' => $googleUser->name,
                     'email' => $googleUser->email,
-                    'password' => bcrypt(uniqid()), // Generate random password
+                    'password' => $password, // Generate random password
                     'google_id' => $googleUser->id,
                 ]);
 
