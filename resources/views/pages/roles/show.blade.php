@@ -26,15 +26,15 @@
                 <div class="card-body py-1">
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item py-1 border-top-0">
-                            <b>Role Name:</b>
+                            <b>ROLE NAME:</b>
                             <span class="float-right">{{$role->name ?? '-'}}</span>
                         </li>
                         <li class="list-group-item py-1">
-                            <b>Created at:</b>
+                            <b>CREATED AT:</b>
                             <span class="float-right">{{$role->created_at ?? '-'}}</span>
                         </li>
                         <li class="list-group-item py-1 border-bottom-0">
-                            <b>Updated at:</b>
+                            <b>UPDATED AT:</b>
                             <span class="float-right">{{$role->updated_at ?? '-'}}</span>
                         </li>
                     </ul>
