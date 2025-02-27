@@ -12,7 +12,17 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">USER DETAILS</h3>
+                    <div class="row">
+                        <div class="col-lg-6 align-middle">
+                            <strong class="text-lg">USER DETAILS</strong>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="{{route('user.index')}}" class="btn btn-secondary btn-xs">
+                                <i class="fa fa-caret-left"></i>
+                                BACK
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body py-1">
                     <ul class="list-group list-group-unbordered">

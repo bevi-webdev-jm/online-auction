@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SystemLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,11 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware('permission:user edit');
         Route::post('user/{id}', [UserController::class, 'update'])->name('user.update')->middleware('permission:user edit');
+    });
+
+    // SYSTEM LOG ROUTES
+    Route::group(['middleware' => 'permission:system logs'], function() {
+        Route::get('system-logs', [SystemLogController::class, 'index'])->name('system-logs');
     });
 
 });

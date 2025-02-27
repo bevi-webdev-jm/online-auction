@@ -11,17 +11,17 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                <div class="row">
-                    <div class="col-lg-6 align-middle">
-                        <strong class="text-lg">ROLE DETAILS</strong>
+                    <div class="row">
+                        <div class="col-lg-6 align-middle">
+                            <strong class="text-lg">ROLE DETAILS</strong>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="{{route('role.index')}}" class="btn btn-secondary btn-xs">
+                                <i class="fa fa-caret-left"></i>
+                                BACK
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-lg-6 text-right">
-                        <a href="{{route('role.index')}}" class="btn btn-secondary btn-xs">
-                            <i class="fa fa-caret-left"></i>
-                            BACK
-                        </a>
-                    </div>
-                </div>
                 </div>
                 <div class="card-body py-1">
                     <ul class="list-group list-group-unbordered">
