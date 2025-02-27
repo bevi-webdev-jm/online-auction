@@ -56,7 +56,7 @@
                                             </a>
                                         @endcan
                                         @can('role delete')
-                                            <a href="" class="btn btn-danger btn-xs mb-0 ml-0">
+                                            <a href="#" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($role->id)}}">
                                                 <i class="fa fa-trash-alt"></i>
                                                 DELETE
                                             </a>
@@ -84,6 +84,14 @@
 
 {{-- Push extra scripts --}}
 @push('js')
-    <script> 
+    <script>
+        $(function() {
+            $('body').on('click', '.btn-delete', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                Livewire.dispatch('setDeleteModel', {type: 'Role', model_id: id});
+                $('#modal-delete').modal('show');
+            });
+        });
     </script>
 @endpush
