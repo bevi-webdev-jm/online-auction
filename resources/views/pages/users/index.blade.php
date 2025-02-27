@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 text-right">
                     @can('user create')
-                        <a href="{{route('role.create')}}" class="btn btn-primary btn-xs">
+                        <a href="{{route('user.create')}}" class="btn btn-primary btn-xs">
                             <i class="fa fa-file"></i>
                             NEW USER
                         </a>
@@ -46,12 +46,12 @@
                                         {{$user->email}}
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
-                                        <a href="{{route('user.show', encrypt($user->id, 'roles'))}}" class="btn btn-info btn-xs mb-0 ml-0">
+                                        <a href="{{route('user.show', encrypt($user->id, 'users'))}}" class="btn btn-info btn-xs mb-0 ml-0">
                                             <i class="fa fa-list"></i>
                                             VIEW
                                         </a>
                                         @can('user edit')
-                                            <a href="{{route('user.edit', encrypt($user->id, 'roles'))}}" class="btn btn-success btn-xs mb-0 ml-0">
+                                            <a href="{{route('user.edit', encrypt($user->id, 'users'))}}" class="btn btn-success btn-xs mb-0 ml-0">
                                                 <i class="fa fa-pen-alt"></i>
                                                 EDIT
                                             </a>
