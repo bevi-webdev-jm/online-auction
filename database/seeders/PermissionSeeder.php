@@ -17,6 +17,12 @@ class PermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions_arr = [
+            'Auctions' => [
+                'auction access'    => 'Allow user to access aution list and details.',
+                'auction create'    => 'Allow user to create auction.',
+                'auction edit'      => 'Allow user to update auction details.',
+                'auction delete'    => 'Allow user to delete auction.'
+            ],
             'Items' => [
                 'item access'   => 'Allow user to access item list and details',
                 'item create'   => 'Allow user to create item.',

@@ -300,6 +300,13 @@ return [
 
     'menu' => [
         [
+            'text'      => 'Auctions',
+            'url'       => 'auctions',
+            'icon'      => 'fas fa-fw fa-gavel',
+            'can'       => 'auction access',
+            'active'    => ['auction*']
+        ],
+        [
             'text'      => 'Items',
             'url'       => 'items',
             'icon'      => 'fas fa-fw fa-laptop',
