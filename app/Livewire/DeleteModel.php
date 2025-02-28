@@ -9,6 +9,9 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Item;
+use App\Models\Auction;
+
+use App\Helpers\GetModelRelationship;
 
 class DeleteModel extends Component
 {
@@ -34,6 +37,7 @@ class DeleteModel extends Component
         if(!Hash::check($this->password, auth()->user()->password)) { // invalid
             $this->error_message = 'incorrect password.';
         } else { // delete function
+
             $this->model->delete();
 
             activity('delete')
@@ -71,6 +75,12 @@ class DeleteModel extends Component
                 $this->name = $this->model->name;
                 $this->model_route = '/items';
             break;
+            case 'Auction':
+                $this->model = Auction::findOrFail($model_id);
+                $this->name = $this->model->auction_code;
+                $this->model_route = '/auctions';
+            break;
+
         }
     }
 

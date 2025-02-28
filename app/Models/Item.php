@@ -24,4 +24,8 @@ class Item extends Model
     public function pictures() {
         return $this->hasMany('App\Models\ItemPicture');
     }
+
+    public function auctions() {
+        return $this->hasMany('App\Models\Auction');
+    }
 }

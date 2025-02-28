@@ -2,12 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
-
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\SystemLogController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\{
+    RoleController, UserController, CompanyController, 
+    SystemLogController, ItemController, AuctionController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +28,18 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function() {
+
+    // AUCTIONS ROUTES
+    Route::group(['middleware' => 'permission:auction access'], function() {
+        Route::get('auctions', [AuctionController::class, 'index'])->name('auction.index');
+        Route::get('auction/create', [AuctionController::class, 'create'])->name('auction.create')->middleware('permission:auction access');
+        Route::post('auction', [AuctionController::class, 'store'])->name('auction.store')->middleware('permission:auction create');
+
+        Route::get('auction/{id}', [AuctionController::class, 'show'])->name('auction.show');
+
+        Route::get('auction/{id}/edit', [AuctionController::class, 'edit'])->name('auction.edit')->middleware('permission:auction edit');
+        Route::post('auction/{id}', [AuctionController::class, 'update'])->name('auction.update')->middleware('permission:auction edit');
+    });
 
     // ITEMS ROUTES
     Route::group(['middleware' => 'permission:item access'], function() {

@@ -27,4 +27,12 @@ class ItemController extends Controller
             'item' => $item
         ]);
     }
+
+    public function show($id) {
+        $item = Item::findOrFail(decrypt($id));
+
+        return view('pages.items.show')->with([
+            'item' => $item
+        ]);
+    }
 }
