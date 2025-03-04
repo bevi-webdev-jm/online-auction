@@ -19,7 +19,7 @@
             <div class="col-lg-4 text-center">
                 <a href="{{asset($item->pictures()->first()->path).'/large.jpg'}}" data-toggle="lightbox" data-title="{{$item->pictures()->first()->title}}">
                     <div class="card mb-2 bg-gradient-dark text-left rounded">
-                        <img class="card-img-top rounded" src="{{asset($item->pictures()->first()->path).'/large.jpg'}}" alt="{{$item->pictures()->first()->title}}">
+                        <img class="card-img-top rounded img-preview" src="{{asset($item->pictures()->first()->path).'/large.jpg'}}" alt="{{$item->pictures()->first()->title}}">
 
                         <div class="ribbon-wrapper ribbon-xl">
                             <div class="ribbon bg-success text-lg">
@@ -58,6 +58,9 @@
     <style>
         .bg-gray-transparent {
             background-color: rgba(0, 0, 0, 0.5);
+        }
+        .img-preview {
+            max-height: 270px !important;
         }
     </style>
 @endpush

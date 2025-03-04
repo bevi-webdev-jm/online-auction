@@ -9,11 +9,19 @@
 @section('content_body')
 
 <div class="row mb-2">
-    <div class="col-12">
+    <div class="col-lg-6">
         <a href="{{route('home')}}" class="btn btn-primary btn-sm">
             <i class="fa fa-home"></i>
             BACK TO HOME
         </a>
+    </div>
+    <div class="col-lg-6 text-right">
+        @can('bidding list')
+            <a href="{{route('bidding.list', encrypt($auction->id))}}" class="btn btn-info btn-sm">
+                <i class="fa fa-list"></i>
+                BIDDERS
+            </a>
+        @endcan
     </div>
 </div>
 

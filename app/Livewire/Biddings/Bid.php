@@ -10,6 +10,7 @@ class Bid extends Component
     public $auction;
     public $bid_amount;
     public $user_biddings;
+    public $highest_bidder = null;
 
     public function PlaceBid() {
         $this->validate([
@@ -52,6 +53,12 @@ class Bid extends Component
 
     public function render()
     {
+        if(auth()->user()->can('bidding leader')) {
+            $this->highest_bidder = Bidding::where('auction_id', $this->auction->id)
+                ->orderBy('bid_amount', 'DESC')
+                ->first();
+        }
+
         $this->checkDuplicateBid();
 
         return view('livewire.biddings.bid');

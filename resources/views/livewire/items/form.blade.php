@@ -145,7 +145,7 @@
 
         </div>
         <div class="card-footer text-right">
-            <button class="btn btn-primary btn-sm" wire:click.prevent="SaveItem">
+            <button class="btn btn-primary btn-sm" wire:click.prevent="SaveItem" wire:loading.attr="disabled" wire:target="SaveItem">
                 <i class="fa fa-save"></i>
                 SAVE ITEM
             </button>

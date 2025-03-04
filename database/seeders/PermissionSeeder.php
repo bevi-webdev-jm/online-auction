@@ -18,7 +18,9 @@ class PermissionSeeder extends Seeder
 
         $permissions_arr = [
             'Biddings' => [
-                'bidding access'    => 'Allow user to access biddings.'
+                'bidding access'    => 'Allow user to access biddings.',
+                'bidding list'      => 'Allow user to access list of bids on an item.',
+                'bidding leader'    => 'Allow user to see the leading bidder on an item.',
             ],
             'Auctions' => [
                 'auction access'    => 'Allow user to access aution list and details.',
