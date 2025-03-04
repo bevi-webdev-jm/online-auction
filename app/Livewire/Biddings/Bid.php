@@ -11,6 +11,7 @@ class Bid extends Component
     public $bid_amount;
     public $user_biddings;
     public $highest_bidder = null;
+    public $lowest_bidder = null;
 
     public function PlaceBid() {
         $this->validate([
@@ -44,6 +45,7 @@ class Bid extends Component
     public function checkDuplicateBid() {
         $this->user_biddings = Bidding::where('auction_id', $this->auction->id)
             ->where('user_id', auth()->user()->id)
+            ->orderBy('bid_amount', 'DESC')
             ->get();
     }
 
@@ -53,9 +55,17 @@ class Bid extends Component
 
     public function render()
     {
-        if(auth()->user()->can('bidding leader')) {
+        if(auth()->user()->can('bidding leader') || $this->auction->show_leading_bidder) {
             $this->highest_bidder = Bidding::where('auction_id', $this->auction->id)
                 ->orderBy('bid_amount', 'DESC')
+                ->first();
+        }
+
+        if($this->auction->show_last_place_bidder) {
+            $this->lowest_bidder = Bidding::selectRaw('MAX(bid_amount) as bid_amount, user_id')
+                ->where('auction_id', $this->auction->id)
+                ->groupBy('user_id')
+                ->orderBy('bid_amount', 'ASC')
                 ->first();
         }
 
