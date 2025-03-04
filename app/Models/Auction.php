@@ -13,6 +13,7 @@ class Auction extends Model
 
     protected $fillable = [
         'item_id',
+        'company_id',
         'auction_code',
         'status',
         'start',
@@ -20,6 +21,11 @@ class Auction extends Model
         'end',
         'end_time',
         'min_bid',
+        'bid_limit',
+        'show_bidders',
+        'show_leading_bidder',
+        'show_last_place_bidder',
+        'restrict_to_company_only',
     ];
 
     public function item() {

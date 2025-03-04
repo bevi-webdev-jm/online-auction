@@ -24,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::get();
+        $auctions = Auction::orderBy('start', 'ASC')
+            ->orderBy('start_time', 'ASC')
+            ->get();
 
         return view('home')->with([
             'auctions' => $auctions

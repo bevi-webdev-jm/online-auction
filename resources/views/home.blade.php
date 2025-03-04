@@ -26,7 +26,7 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <style>
         .bg-gray-transparent {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
         }
         .img-preview {
             max-height: 270px !important;

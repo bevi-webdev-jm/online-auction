@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Item;
+use App\Models\Company;
 
 class AuctionEditRequest extends FormRequest
 {
@@ -37,6 +38,20 @@ class AuctionEditRequest extends FormRequest
                     }
                 }
             ],
+            'company_id' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    try {
+                        $decryptedId = decrypt($value); // Decrypt the company_id
+    
+                        if (!Company::where('id', $decryptedId)->exists()) {
+                            $fail('The selected company is invalid.');
+                        }
+                    } catch (\Exception $e) {
+                        $fail('Invalid company ID.');
+                    }
+                }
+            ],
             'start' => [
                 'required',
                 'date',
@@ -55,6 +70,9 @@ class AuctionEditRequest extends FormRequest
             ],
             'min_bid' => [
                 'required'
+            ],
+            'bid_limit' => [
+                'required_if:user_bidding_limit,1'
             ]
         ];
     }
