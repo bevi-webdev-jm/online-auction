@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\{
     RoleController, UserController, CompanyController, 
-    SystemLogController, ItemController, AuctionController
+    SystemLogController, ItemController, AuctionController,
+    BiddingController
 };
 
 /*
@@ -28,6 +29,11 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function() {
+
+    // BIDDINGS ROUTE
+    Route::group(['middleware' => 'permission:bidding access'], function() {
+        Route::get('bidding/{id}', [BiddingController::class, 'index'])->name('bidding.index');
+    });
 
     // AUCTIONS ROUTES
     Route::group(['middleware' => 'permission:auction access'], function() {

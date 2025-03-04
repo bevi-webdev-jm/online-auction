@@ -39,10 +39,12 @@
                     </div>
                 </a>
 
-                <a href="" class="btn btn-danger btn-sm">
-                    <i class="fa fa-gavel mr-1"></i>
-                    BID
-                </a>
+                @can('bidding access')
+                    <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-danger btn-sm">
+                        <i class="fa fa-gavel mr-1"></i>
+                        BID
+                    </a>
+                @endcan
             </div>
         @endforeach
     </div>
