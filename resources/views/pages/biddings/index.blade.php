@@ -16,12 +16,12 @@
         </a>
     </div>
     <div class="col-lg-6 text-right">
-        @can('bidding list')
+        @if(auth()->user()->can('bidding list') || $auction->show_bidders)
             <a href="{{route('bidding.list', encrypt($auction->id))}}" class="btn btn-info btn-sm">
                 <i class="fa fa-list"></i>
                 BIDDERS
             </a>
-        @endcan
+        @endif
     </div>
 </div>
 
