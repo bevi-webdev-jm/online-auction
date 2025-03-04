@@ -1,8 +1,18 @@
 <div>
+    @if(auth()->user()->can('bidding leader') && !empty($highest_bidder))
+        <hr>
+        <h4>HIGEST BIDDER</h4>
+        <div class="bg-success px-3 py-1 rounded">
+            <h3 class="font-weight-bold mb-0">
+                {{$highest_bidder->user->name}}
+            </h3>
+        </div>
+    @endif
+
     @if(empty($user_biddings->count()))
         <hr>
         <h4>PLACE YOU BID</h4>
-        <div class="bg-gray pt-2 px-3 mt-1">
+        <div class="bg-gray pt-2 px-3 mt-1 rounded">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -23,9 +33,9 @@
     @else
         <hr>
         <h4>YOUR BID</h4>
-        <div class="bg-gray py-2 px-3 mt-1">
-            <h2 class="mb-0">
-                {{number_format($user_biddings->first()->bid_amount)}}
+        <div class="bg-info py-2 px-3 mt-1 rounded">
+            <h2 class="mb-0 font-weight-bold">
+                {{number_format($user_biddings->first()->bid_amount, 2)}}
             </h2>
             <span class="mt-0">
                 <small>Please wait for the auction to end to see the result. Good luck!</small>

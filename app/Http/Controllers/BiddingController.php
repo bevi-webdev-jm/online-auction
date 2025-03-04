@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Auction;
+use App\Models\Bidding;
 
 class BiddingController extends Controller
 {
@@ -15,6 +16,19 @@ class BiddingController extends Controller
         return view('pages.biddings.index')->with([
             'auction' => $auction,
             'item' => $item
+        ]);
+    }
+
+    public function list($id) {
+        $auction = Auction::findOrFail(decrypt($id));
+
+        $bidders = Bidding::orderBy('bid_amount', 'DESC')
+            ->where('auction_id', $auction->id)
+            ->paginate(10)->appends(request()->query());
+
+        return view('pages.biddings.list')->with([
+            'auction' => $auction,
+            'bidders' => $bidders
         ]);
     }
 }
