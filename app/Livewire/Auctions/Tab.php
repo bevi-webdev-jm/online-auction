@@ -27,6 +27,10 @@ class Tab extends Component
         } else {
             $this->status = 'OPEN';
         }
+
+        $this->auction->update([
+            'status' => $this->status
+        ]);
     }
 
     public function getTimeRemaining() {
@@ -55,9 +59,9 @@ class Tab extends Component
     
         $parts = [];
         if ($days > 0) $parts[] = "$days day" . ($days > 1 ? 's' : '');
-        if ($hours > 0) $parts[] = "$hours hour" . ($hours > 1 ? 's' : '');
-        if ($minutes > 0) $parts[] = "$minutes minute" . ($minutes > 1 ? 's' : '');
-        if ($seconds > 0) $parts[] = "$seconds second" . ($seconds > 1 ? 's' : '');
+        if ($hours > 0) $parts[] = "$hours hr" . ($hours > 1 ? 's' : '');
+        if ($minutes > 0) $parts[] = "$minutes min" . ($minutes > 1 ? 's' : '');
+        if ($seconds > 0) $parts[] = "$seconds sec" . ($seconds > 1 ? 's' : '');
     
         return implode(', ', $parts);
     }

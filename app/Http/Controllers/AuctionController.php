@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Auction;
 use App\Models\Item;
+use App\Models\Company;
 
 use App\Http\Requests\AuctionAddRequest;
 use App\Http\Requests\AuctionEditRequest;
@@ -32,9 +33,17 @@ class AuctionController extends Controller
             $items_arr[encrypt($item->id)] = '['.$item->item_number.'] '.$item->name;
         }
 
+        $companies = Company::orderBy('name', 'ASC')
+            ->get();
+        $company_arr = [];
+        foreach($companies as $company) {
+            $company_arr[encrypt($company->id)] = $company->name;
+        }
+
         return view('pages.auctions.create')->with([
             'auction_code' => $auction_code,
-            'items' => $items_arr
+            'items' => $items_arr,
+            'companies' => $company_arr
         ]);
     }
 
@@ -42,12 +51,18 @@ class AuctionController extends Controller
 
         $auction = new Auction([
             'item_id' => decrypt($request->item_id),
+            'company_id' => decrypt($request->company_id),
             'auction_code' => $this->generateAuctionCode(),
             'start' => $request->start,
             'start_time' => $request->start_time,
             'end' => $request->end,
             'end_time' => $request->end_time,
-            'min_bid' => $request->min_bid
+            'min_bid' => $request->min_bid,
+            'bid_limit' => $request->user_bidding_limit ? $request->bid_limit : NULL,
+            'show_bidders' => $request->show_bidders,
+            'show_leading_bidder' => $request->show_leading_bidder,
+            'show_last_place_bidder' => $request->show_last_place_bidder,
+            'restrict_to_company_only' => $request->restrict_to_company_only,
         ]);
         $auction->save();
 
@@ -86,10 +101,24 @@ class AuctionController extends Controller
             $items_arr[$encrypted_id] = '['.$item->item_number.'] '.$item->name;
         }
 
+        $companies = Company::orderBy('name', 'ASC')
+            ->get();
+        $company_arr = [];
+        $selected_company = '';
+        foreach($companies as $company) {
+            $encrypted_id = encrypt($company->id);
+            if($auction->company_id == $company->id) {
+                $selected_company = $encrypted_id;
+            }
+            $company_arr[$encrypted_id] = $company->name;
+        }
+
         return view('pages.auctions.edit')->with([
             'auction' => $auction,
             'items' => $items_arr,
-            'selected_item' => $selected_item
+            'selected_item' => $selected_item,
+            'companies' => $company_arr,
+            'selected_company' => $selected_company,
         ]);
     }
 
@@ -100,11 +129,17 @@ class AuctionController extends Controller
 
         $auction->update([
             'item_id' => decrypt($request->item_id),
+            'company_id' => decrypt($request->company_id),
             'start' => $request->start,
             'start_time' => $request->start_time,
             'end' => $request->end,
             'end_time' => $request->end_time,
-            'min_bid' => $request->min_bid
+            'min_bid' => $request->min_bid,
+            'bid_limit' => $request->user_bidding_limit ? $request->bid_limit : NULL,
+            'show_bidders' => $request->show_bidders,
+            'show_leading_bidder' => $request->show_leading_bidder,
+            'show_last_place_bidder' => $request->show_last_place_bidder,
+            'restrict_to_company_only' => $request->restrict_to_company_only,
         ]);
 
         $changes_arr['changes'] = $auction->getChanges();

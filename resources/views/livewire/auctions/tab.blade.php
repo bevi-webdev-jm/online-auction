@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
+            <div class="card-img-overlay d-flex flex-column justify-content-end p-2">
                 <div class="bg-gray-transparent p-2 rounded">
                     <h5 class="card-title text-primary text-white">{{$auction->auction_code}}</h5>
                     <p class="card-text text-white pb-2 pt-1">{{$item->name}}</p>
@@ -24,9 +24,10 @@
     @if($status != 'ENDED')
         <!-- time counter -->
         <div wire:poll.1000ms>
-            <p class="badge badge-{{$status_arr[$status]}} mb-1">
-                {{$status == 'OPEN' ? 'ENDS IN: '.$this->getTimeRemaining() : 'STARTS IN: '.$this->getTimeRemaining()}}
-            </p>
+            <h6 class="bg-{{$status_arr[$status]}} mb-1 rounded">
+                <b>{{$status == 'OPEN' ? 'ENDS IN: ' : 'STARTS IN: '}}</b>
+                {{$this->getTimeRemaining()}}
+            </h6>
         </div>
      @endif
 
