@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Auction;
 
+use Carbon\Carbon;
+
 class HomeController extends Controller
 {
     /**
@@ -24,7 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::orderBy('start', 'ASC')
+        $auctions =  Auction::where('end', '>=', Carbon::now()->subDays(2)->toDateString()) // Auctions that ended in the last 2 days
+            ->where('end_time', '>=', date('H:i:s')) // Ensure they are already ended
+            ->orderBy('start', 'ASC')
             ->orderBy('start_time', 'ASC')
             ->get();
 
