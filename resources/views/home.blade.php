@@ -12,9 +12,11 @@
     
     <div class="row">
         @foreach($auctions as $auction)
-            <div class="col-lg-4 text-center">
-                <livewire:auctions.tab :auction="$auction"/>
-            </div>
+            @if(($auction->restrict_to_company_only && $auction->company_id == auth()->user()->company_id) || empty($auction->restrict_to_company_only) || auth()->user()->hasRole('superadmin'))
+                <div class="col-lg-4 text-center">
+                    <livewire:auctions.tab :auction="$auction"/>
+                </div>
+            @endif
         @endforeach
     </div>
 @stop

@@ -21,37 +21,66 @@
     <header class="text-center bg-black text-white py-5 mt-2 rounded">
         <h1>WELCOME TO ONLINE AUCTION</h1>
         <p>Bid on unique items and win amazing deals!</p>
-        <a href="auction.html" class="btn btn-primary">Explore Auctions</a>
     </header>
 
     <section class="container text-center my-5">
         <h2>FEATURED AUCTIONS</h2>
         
         <div class="row">
-            @for($i = 1; $i <= 4; $i++)
-                <div class="col-lg-3">
-                    <div class="position-relative">
-                        <img src="{{asset('/vendor/adminlte/dist/img/photo'.$i.'.'.($i >= 3 ? 'jpg' : 'png'))}}" alt="Photo 2" class="img-fluid">
-                        <div class="ribbon-wrapper ribbon-xl">
-                            <div class="ribbon bg-success text-lg">
-                                OPEN
+            @foreach($auctions as $auction)
+                <a href="{{asset($auction->item->pictures()->first()->path).'/large.jpg'}}" data-toggle="lightbox" data-title="Image preview">
+                    <div class="col-lg-4 text-center">
+                        <div class="card mb-2 bg-gradient-dark text-left rounded">
+                            <img class="card-img-top rounded img-preview" src="{{asset($auction->item->pictures()->first()->path).'/large.jpg'}}" alt="{{$auction->item->pictures()->first()->title}}">
+
+                            <div class="ribbon-wrapper ribbon-xl">
+                                <div class="ribbon bg-{{$status_arr[$auction->status]}} text-lg">
+                                    {{$auction->status}}
+                                </div>
+                            </div>
+
+                            <div class="card-img-overlay d-flex flex-column justify-content-end p-2">
+                                <div class="bg-gray-transparent p-2 rounded">
+                                    <h5 class="card-title text-primary text-white">{{$auction->auction_code}}</h5>
+                                    <p class="card-text text-white pb-2 pt-1">{{$auction->item->name}}</p>
+                                    <a href="#" class="text-white">START: {{date('Y-m-d H:i:s a', strtotime($auction->start.' '.$auction->start_time))}}</a>
+                                    <br>
+                                    <a href="#" class="text-white">END: {{date('Y-m-d H:i:s a', strtotime($auction->end.' '.$auction->end_time))}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endfor
+                </a>
+            @endforeach
         </div>
     </section>
+
 @stop
 
 {{-- Push extra CSS --}}
 
 @push('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    .content-wrapper {
+        /* background-image:url('/assets/images/openart-image_4.svg') !important; */
+        background: rgb(161, 161, 161) !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 400px; /* Adjust height as needed */
+    }
+
+    .bg-gray-transparent {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    .img-preview {
+        max-height: 270px !important;
+    }
+</style>
 @endpush
 
 {{-- Push extra scripts --}}
-
+@section('plugins.EkkoLightbox', true)
 @push('js')
 @endpush

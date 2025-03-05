@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\{
     RoleController, UserController, CompanyController, 
     SystemLogController, ItemController, AuctionController,
-    BiddingController
+    BiddingController, HomeController
 };
 
 /*
@@ -19,9 +19,7 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
 Auth::routes();
 
@@ -103,4 +101,4 @@ Route::group(['middleware' => 'auth'], function() {
 
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');

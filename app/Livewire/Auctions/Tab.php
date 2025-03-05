@@ -46,17 +46,17 @@ class Tab extends Component
                 ->first();
 
             // check if exists
-            $auction_winner = AuctionWinner::where('auction_id', $this->auction_id)
+            $auction_winner = AuctionWinner::where('auction_id', $this->auction->id)
                 ->first();
 
             if(!empty($auction_winner)) {
                 $auction_winner->update([
-                    'auction_id' => $this->auction_id,
+                    'auction_id' => $this->auction->id,
                     'bidding_id' => $highest_bid->id
                 ]);
             } else {
                 $auction_winner = new AuctionWinner([
-                    'auction_id' => $this->auction_id,
+                    'auction_id' => $this->auction->id,
                     'bidding_id' => $highest_bid->id
                 ]);
                 $auction_winner->save();
