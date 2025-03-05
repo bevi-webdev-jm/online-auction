@@ -3,6 +3,8 @@
 namespace App\Livewire\Auctions;
 
 use Livewire\Component;
+use App\Models\Bidding;
+use App\Models\AuctionWinner;
 
 class Tab extends Component
 {
@@ -31,6 +33,35 @@ class Tab extends Component
         $this->auction->update([
             'status' => $this->status
         ]);
+
+        $this->getAuctionWinner();
+    }
+
+    private function getAuctionWinner() {
+        if($this->status == 'ENDED') {
+            // get highest bid and the first to bid
+            $highest_bid = Bidding::where('auction_id', $this->auction->id)
+                ->orderBy('bid_amount', 'DESC')
+                ->orderBy('created_at', 'ASC')
+                ->first();
+
+            // check if exists
+            $auction_winner = AuctionWinner::where('auction_id', $this->auction_id)
+                ->first();
+
+            if(!empty($auction_winner)) {
+                $auction_winner->update([
+                    'auction_id' => $this->auction_id,
+                    'bidding_id' => $highest_bid->id
+                ]);
+            } else {
+                $auction_winner = new AuctionWinner([
+                    'auction_id' => $this->auction_id,
+                    'bidding_id' => $highest_bid->id
+                ]);
+                $auction_winner->save();
+            }
+        }
     }
 
     public function getTimeRemaining() {
