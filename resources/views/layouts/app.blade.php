@@ -11,12 +11,12 @@
 
 @section('content_header')
     @hasSection('content_header_title')
-        <h1 class="text-muted">
+        <h1 class="text-light">
             @yield('content_header_title')
 
             @hasSection('content_header_subtitle')
-                <small class="text-dark">
-                    <i class="fas fa-xs fa-angle-right text-muted"></i>
+                <small class="text-light">
+                    <i class="fas fa-xs fa-angle-right"></i>
                     @yield('content_header_subtitle')
                 </small>
             @endif
@@ -83,15 +83,14 @@
 @push('css')
 <style type="text/css">
 
-    {{-- You can add AdminLTE customizations here --}}
-    /*
-    .card-header {
-        border-bottom: none;
+    .content-wrapper {
+        background-image:url('/assets/images/bid.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 400px; /* Adjust height as needed */
     }
-    .card-title {
-        font-weight: 600;
-    }
-    */
 
 </style>
 @endpush

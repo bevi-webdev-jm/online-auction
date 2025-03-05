@@ -5,20 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Auction;
 
-use Carbon\Carbon;
-
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    
     /**
      * Show the application dashboard.
      *
@@ -26,14 +15,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $auctions =  Auction::where('end', '>=', Carbon::now()->subDays(2)->toDateString()) // Auctions that ended in the last 2 days
-            ->where('end_time', '>=', date('H:i:s')) // Ensure they are already ended
+        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days
             ->orderBy('start', 'ASC')
             ->orderBy('start_time', 'ASC')
             ->get();
 
         return view('home')->with([
             'auctions' => $auctions
+        ]);
+    }
+
+    public function welcome() {
+        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days
+            ->whereNotNull('status')
+            ->orderBy('start', 'ASC')
+            ->orderBy('start_time', 'ASC')
+            ->get();
+
+        $status_arr = [
+            'OPEN' => 'success',
+            'UPCOMING' => 'warning',
+            'ENDED' => 'danger'
+        ];
+
+        return view('welcome')->with([
+            'auctions' => $auctions,
+            'status_arr' => $status_arr
         ]);
     }
 }
