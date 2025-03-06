@@ -25,13 +25,22 @@ class AuctionController extends Controller
     public function create() {
         $auction_code = $this->generateAuctionCode();
 
-        $items = Item::orderBy('item_number', 'ASC')
-            ->get();
+        $items = Item::whereDoesntHave('auctions', function ($query) {
+            $query->whereHas('auction_winner');
+        })
+        ->orderBy('item_number', 'ASC')
+        ->get();
 
         $items_arr = [];
         foreach($items as $item) {
             $items_arr[encrypt($item->id)] = '['.$item->item_number.'] '.$item->name;
         }
+
+        $items = Item::whereDoesntHave('auctions', function ($query) {
+                $query->whereHas('auction_winner');
+            })
+            ->orderBy('item_number', 'ASC')
+            ->get();
 
         $companies = Company::orderBy('name', 'ASC')
             ->get();
@@ -88,7 +97,11 @@ class AuctionController extends Controller
     public function edit($id) {
         $auction = Auction::findOrFail(decrypt($id));
 
-        $items = Item::orderBy('item_number', 'ASC')
+        $items = Item::whereDoesntHave('auctions', function ($query) {
+                $query->whereHas('auction_winner');
+            })
+            ->orWhere('id', $auction->item_id)
+            ->orderBy('item_number', 'ASC')
             ->get();
 
         $items_arr = [];

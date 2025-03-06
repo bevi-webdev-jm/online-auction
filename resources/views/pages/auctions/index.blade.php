@@ -65,18 +65,21 @@
                                             <i class="fa fa-list"></i>
                                             VIEW
                                         </a>
-                                        @can('auction edit')
-                                            <a href="{{route('auction.edit', encrypt($auction->id, 'auctions'))}}" class="btn btn-success btn-xs mb-0 ml-0">
-                                                <i class="fa fa-pen-alt"></i>
-                                                EDIT
-                                            </a>
-                                        @endcan
-                                        @can('auction delete')
-                                            <a href="#" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($auction->id)}}">
-                                                <i class="fa fa-trash-alt"></i>
-                                                DELETE
-                                            </a>
-                                        @endcan
+                                        @if($auction->status != 'ENDED')
+                                            @can('auction edit')
+                                                <a href="{{route('auction.edit', encrypt($auction->id, 'auctions'))}}" class="btn btn-success btn-xs mb-0 ml-0">
+                                                    <i class="fa fa-pen-alt"></i>
+                                                    EDIT
+                                                </a>
+                                            @endcan
+                                        
+                                            @can('auction delete')
+                                                <a href="#" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($auction->id)}}">
+                                                    <i class="fa fa-trash-alt"></i>
+                                                    DELETE
+                                                </a>
+                                            @endcan
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

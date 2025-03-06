@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => 'ONLINE ACTION',
+    'logo' => 'ONLINE AUCTION',
     'logo_img' => 'assets/images/auction-logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -346,6 +346,12 @@ return [
                     'icon'      => 'fas fa-fw fa-stream',
                     'can'       => 'system logs',
                     'active'    => ['system-logs']
+                ],
+                [
+                    'text'      => 'QR Generator',
+                    'url'       => 'qr-generator',
+                    'icon'      => 'fas fa-fw fa-qrcode',
+                    'active'    => ['qr-generator']
                 ]
             ],
         ],

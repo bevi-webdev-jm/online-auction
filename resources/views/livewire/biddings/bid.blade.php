@@ -32,7 +32,7 @@
         </div>
     @endif
 
-    @if((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit))
+    @if(((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit)) && $auction->status == 'OPEN')
         <hr>
         <h4>PLACE YOU BID</h4>
         <div class="bg-gray pt-2 px-3 mt-1 rounded">

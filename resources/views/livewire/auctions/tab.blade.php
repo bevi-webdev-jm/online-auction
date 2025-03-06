@@ -29,13 +29,18 @@
                 {{$this->getTimeRemaining()}}
             </h6>
         </div>
-     @endif
+    @endif
 
     @can('bidding access')
         @if($status == 'OPEN')
             <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-danger btn-sm">
                 <i class="fa fa-gavel mr-1"></i>
                 BID
+            </a>
+        @else
+            <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-primary btn-sm">
+                <i class="fa fa-gavel mr-1"></i>
+                VIEW DETAILS
             </a>
         @endif
     @endcan
