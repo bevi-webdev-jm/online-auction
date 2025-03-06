@@ -31,4 +31,8 @@ class Auction extends Model
     public function item() {
         return $this->belongsTo('App\Models\Item');
     }
+
+    public function auction_winner() {
+        return $this->hasOne('App\Models\AuctionWinner');
+    }
 }

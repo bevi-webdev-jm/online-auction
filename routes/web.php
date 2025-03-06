@@ -102,3 +102,6 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/qr-generator', function() {
+    return view('qr-generator');
+})->name('qr-generator');
