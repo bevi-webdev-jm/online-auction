@@ -55,11 +55,13 @@ class Tab extends Component
                     'bidding_id' => $highest_bid->id
                 ]);
             } else {
-                $auction_winner = new AuctionWinner([
-                    'auction_id' => $this->auction->id,
-                    'bidding_id' => $highest_bid->id
-                ]);
-                $auction_winner->save();
+                if(!empty($highest_bid)) {
+                    $auction_winner = new AuctionWinner([
+                        'auction_id' => $this->auction->id,
+                        'bidding_id' => $highest_bid->id
+                    ]);
+                    $auction_winner->save();
+                }
             }
         }
     }
