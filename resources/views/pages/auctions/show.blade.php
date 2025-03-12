@@ -60,6 +60,38 @@
             </div>
         </div>
     </div>
+
+    <!-- DIDDINGS -->
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">BIDDINGS</h3>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th>USER</th>
+                            <th>BID AMOUNT</th>
+                            <th>DATETIME</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($auction->biddings()->orderBy('bid_amount', 'DESC')->orderBy('created_at', 'ASC')->get() as $bidding)
+                            <tr class="text-center">
+                                <td>{{$bidding->user->name}}</td>
+                                <td>{{number_format($bidding->bid_amount, 2)}}</td>
+                                <td>{{$bidding->created_at}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
 </div>
     
 @stop

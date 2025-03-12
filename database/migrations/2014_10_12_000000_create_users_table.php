@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('google_id')->nullable();
+            $table->boolean('accepts_terms_and_conditions')->default(false);
             $table->timestamps();
 
             $table->foreign('company_id')

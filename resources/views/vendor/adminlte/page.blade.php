@@ -39,10 +39,11 @@
             @include('adminlte::partials.cwrapper.cwrapper-iframe')
         @endempty
 
-        {{-- Footer --}}
+        {{-- Footer 
         @hasSection('footer')
             @include('adminlte::partials.footer.footer')
         @endif
+        --}}
 
         {{-- Right Control Sidebar --}}
         @if($layoutHelper->isRightSidebarEnabled())
