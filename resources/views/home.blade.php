@@ -9,16 +9,9 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
+
+        <livewire:terms-agreement :auctions="$auctions"/>
     
-    <div class="row">
-        @foreach($auctions as $auction)
-            @if(($auction->restrict_to_company_only && $auction->company_id == auth()->user()->company_id) || empty($auction->restrict_to_company_only) || auth()->user()->hasRole('superadmin'))
-                <div class="col-lg-4 text-center">
-                    <livewire:auctions.tab :auction="$auction"/>
-                </div>
-            @endif
-        @endforeach
-    </div>
 @stop
 
 {{-- Push extra CSS --}}

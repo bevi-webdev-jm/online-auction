@@ -35,4 +35,8 @@ class Auction extends Model
     public function auction_winner() {
         return $this->hasOne('App\Models\AuctionWinner');
     }
+
+    public function biddings() {
+        return $this->hasMany('App\Models\Bidding');
+    }
 }
