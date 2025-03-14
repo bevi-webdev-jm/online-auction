@@ -16,13 +16,12 @@
             </div>
             <div class="card-body">
 
-                <h5>ONLINE BIDDING MECHANICS</h5>
+                <h5>ONLINE BIDDING GUIDELINES</h5>
 
                 <strong>You declined the terms and conditions</strong>
                 <ul>
-                    <li>You cannot bid and view the list of items for auctions.</li>
-                    <li>Make sure you understand the terms and conditions before accepting.</li>
-                    <li>Read and accept the terms before bidding.</li>
+                    <li>To access the auction items and participate in bidding, you must read and accept the terms and conditions.</li>
+                    <li>Please review the terms carefully before proceeding.</li>
                 </ul>
             </div>
             <div class="card-footer">

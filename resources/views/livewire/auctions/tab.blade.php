@@ -12,7 +12,7 @@
             <div class="card-img-overlay d-flex flex-column justify-content-end p-2">
                 <div class="bg-gray-transparent p-2 rounded">
                     <h5 class="card-title text-primary text-white">{{$auction->auction_code}}</h5>
-                    <p class="card-text text-white pb-2 pt-1">{{$item->name}}</p>
+                    <p class="card-text text-white pb-2 pt-1">[{{$item->item_number}}] {{$item->name}}</p>
                     <a href="#" class="text-white">START: {{date('Y-m-d H:i:s a', strtotime($auction->start.' '.$auction->start_time))}}</a>
                     <br>
                     <a href="#" class="text-white">END: {{date('Y-m-d H:i:s a', strtotime($auction->end.' '.$auction->end_time))}}</a>
@@ -32,16 +32,18 @@
     @endif
 
     @can('bidding access')
-        @if($status == 'OPEN')
-            <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-danger btn-sm">
-                <i class="fa fa-gavel mr-1"></i>
-                BID
-            </a>
-        @else
-            <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-primary btn-sm">
-                <i class="fa fa-gavel mr-1"></i>
-                VIEW DETAILS
-            </a>
-        @endif
+        <div class="mb-2">
+            @if($status == 'OPEN')
+                <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-danger btn-sm">
+                    <i class="fa fa-gavel mr-1"></i>
+                    BID
+                </a>
+            @else
+                <a href="{{route('bidding.index', encrypt($auction->id))}}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-gavel mr-1"></i>
+                    VIEW DETAILS
+                </a>
+            @endif
+        </div>
     @endcan
 </div>
