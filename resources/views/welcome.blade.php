@@ -24,7 +24,7 @@
     </header>
 
     <section class="container text-center my-5">
-        <h2>FEATURED AUCTIONS</h2>
+        <h2 class="text-white font-weight-bold">FEATURED AUCTIONS</h2>
         
         <div class="row">
             @foreach($auctions as $auction)
@@ -62,13 +62,12 @@
 @push('css')
 <style>
     .content-wrapper {
-        /* background-image:url('/assets/images/openart-image_4.svg') !important; */
-        background: rgb(161, 161, 161) !important;
+        background-image:url('/assets/images/openart-image_4.svg') !important;
+        /* background: rgb(161, 161, 161) !important; */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         width: 100%;
-        height: 400px; /* Adjust height as needed */
     }
 
     .bg-gray-transparent {
