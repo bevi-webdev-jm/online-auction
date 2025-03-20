@@ -11,6 +11,11 @@ use App\Models\Company;
 use App\Http\Requests\AuctionAddRequest;
 use App\Http\Requests\AuctionEditRequest;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AuctionExport;
+
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+
 class AuctionController extends Controller
 {
     public function index(Request $request) {
@@ -187,5 +192,21 @@ class AuctionController extends Controller
         } while (Auction::where('auction_code', $code)->exists()); // Ensure uniqueness
     
         return $code;
+    }
+
+    public function export($id) {
+        $auction = Auction::findOrFail(decrypt($id));
+
+        return Excel::download(new AuctionExport($auction), 'auction-'.$auction->auction_code.'.xlsx');
+    }
+
+    public function printPdf($id) {
+        $auction = Auction::findOrFail(decrypt($id));
+
+        $pdf = PDF::loadView('pages.auctions.pdf', [
+            'auction' => $auction,
+        ]);
+
+        return $pdf->stream('auction-'.$auction->auction_code.'-'.time().'.pdf');
     }
 }
