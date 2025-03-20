@@ -1,14 +1,24 @@
 <div>
     @if(auth()->user()->accepts_terms_and_conditions == 1)
-        <div class="row">
-            @foreach($auctions as $auction)
-                @if(($auction->restrict_to_company_only && $auction->company_id == auth()->user()->company_id) || empty($auction->restrict_to_company_only) || auth()->user()->hasRole('superadmin'))
-                    <div class="col-lg-4 text-center">
-                        <livewire:auctions.tab :auction="$auction"/>
-                    </div>
-                @endif
-            @endforeach
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">AUCTIONS</h3>
+                <div class="card-tools">
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach($auctions as $auction)
+                        @if(($auction->restrict_to_company_only && $auction->company_id == auth()->user()->company_id) || empty($auction->restrict_to_company_only) || auth()->user()->hasRole('superadmin'))
+                            <div class="col-lg-4 text-center">
+                                <livewire:auctions.tab :auction="$auction"/>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
+        
     @elseif(auth()->user()->accepts_terms_and_conditions == 2)
         <div class="card">
             <div class="card-header">
@@ -57,7 +67,7 @@
 
                 <strong>Payment and Confirmation</strong>
                 <ul>
-                    <li>Payment shall be paid in cash or bank transfer.</li>
+                    <li>Payment shall only be paid in cash.</li>
                     <li>Payments must be completed within two (2) days.</li>
                     <li>Failure to pay within the timeframe may result in the item being awarded to the next highest bidder.</li>
                 </ul>

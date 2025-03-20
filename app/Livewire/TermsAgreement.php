@@ -3,10 +3,16 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+
+use App\Models\Auction;
 
 class TermsAgreement extends Component
 {
-    public $auctions;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $search;
 
     public function Accept() {
         auth()->user()->update([
@@ -28,6 +34,22 @@ class TermsAgreement extends Component
 
     public function render()
     {
-        return view('livewire.terms-agreement');
+        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days
+            ->orderBy('start', 'ASC')
+            ->orderBy('start_time', 'ASC')
+            ->when(!empty($this->search), function($query) {
+                $query->where('auction_code', 'LIKE', '%'.$this->search.'%')
+                    ->orWhere('status', 'LIKE', '%'.$this->search.'%')
+                    ->orWhereHas('item', function($qry) {
+                        $qry->where('item_number', 'like', '%'.$this->search.'%')
+                            ->orWhere('name', 'like', '%'.$this->search.'%');
+                    });
+            })
+            ->get();
+
+
+        return view('livewire.terms-agreement')->with([
+            'auctions' => $auctions
+        ]);
     }
 }

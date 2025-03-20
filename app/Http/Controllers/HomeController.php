@@ -15,14 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days
-            ->orderBy('start', 'ASC')
-            ->orderBy('start_time', 'ASC')
-            ->get();
 
-        return view('home')->with([
-            'auctions' => $auctions
-        ]);
+        return view('home');
     }
 
     public function welcome() {
@@ -30,6 +24,7 @@ class HomeController extends Controller
             ->whereNotNull('status')
             ->orderBy('start', 'ASC')
             ->orderBy('start_time', 'ASC')
+            ->limit(6)
             ->get();
 
         $status_arr = [

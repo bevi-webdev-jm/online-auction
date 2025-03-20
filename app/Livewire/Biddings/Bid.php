@@ -12,6 +12,15 @@ class Bid extends Component
     public $user_biddings;
     public $highest_bidder = null;
     public $lowest_bidder = null;
+    public $read_mechanics = false;
+
+    public function readMechanics() {
+        if($this->read_mechanics) {
+            $this->read_mechanics = false;
+        } else {
+            $this->read_mechanics = true;
+        }
+    }
 
     public function PlaceBid() {
         $this->validate([

@@ -10,8 +10,8 @@
 
 @section('content_body')
 
-        <livewire:terms-agreement :auctions="$auctions"/>
-    
+    <livewire:terms-agreement/>
+
 @stop
 
 {{-- Push extra CSS --}}
