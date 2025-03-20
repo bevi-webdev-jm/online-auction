@@ -36,6 +36,10 @@
 
         .logo {
             max-height: 50px;
+            max-width: 150px;
+        }
+        .th-logo {
+            width: 160px !important;
         }
 
         .text-center {
@@ -51,11 +55,19 @@
         }
         .item-picture {
             margin-top: 30px;
-            margin-right: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
             max-height: 100px;
         }
         .p-0 {
-            padding: 0;
+            padding: 0 !important;
+        }
+        .m-0 {
+            margin: 0 !important;
+        }
+        .header-title {
+            font-size: 30px !important;
+            padding-right: 110px !important;
         }
     </style>
 </head>
@@ -64,9 +76,11 @@
     <table class="table table-sm">
         <thead>
             <tr>
-                {{-- logo --}}
-                <th class="align-middle">
+                <th class="align-middle text-center p-0 m-0 th-logo">
                     <img src="{{public_path('assets/images/BEVI.jpg')}}" alt="logo" class="logo">
+                </th>
+                <th class="header-title text-center align-middle">
+                    ONLINE AUCTION
                 </th>
             </tr>
         </thead>
@@ -92,12 +106,11 @@
                 <td>{{date('Y-m-d H:i:s a', strtotime($auction->end.' '.$auction->end_time))}}</td>
             </tr>
         </tbody>
-    </table>
 
-    @php
-    $item = $auction->item;
-    @endphp
-    <table class="table table-sm">
+        @php
+        $item = $auction->item;
+        @endphp
+        
         <thead>
             <tr>
                 <th colspan="4" class="bg-gray">ITEM DETAILS</th>
@@ -139,7 +152,7 @@
         </thead>
         <tbody>
             <tr>
-                <td class="p-0">
+                <td class="p-0 align-middle">
                     @foreach($item->pictures as $picture)
                         <img src="{{public_path($picture->path).'/small.jpg'}}" alt="{{$picture->title}}" class="item-picture">
                     @endforeach
@@ -154,7 +167,7 @@
                 <th colspan="4" class="bg-gray">BIDDERS</th>
             </tr>
             <tr>
-                <th>#</th>
+                <th class="text-center">#</th>
                 <th>NAME</th>
                 <th>BID AMOUNT</th>
                 <th>TIMESTAMP</th>
@@ -165,16 +178,25 @@
                 $bidders = $auction->biddings()
                     ->orderBy('bid_amount', 'DESC')
                     ->orderBy('created_at', 'ASC')
-                    ->get()
+                    ->get();
+
             @endphp
-            @foreach($bidders as $bidder)
+            @if(!empty($bidders->count()))
+                @foreach($bidders as $key => $bidder)
+                    <tr>
+                        <td class="text-center">{{$key + 1}}</td>
+                        <td>{{$bidder->user->name}}</td>
+                        <td>{{number_format($bidder->bid_amount, 2)}}</td>
+                        <td>{{date('Y-m-d H:i:s a', strtotime($bidder->created_at))}}</td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td>{{}}</td>
-                    <td>{{$bidder->user->name}}</td>
-                    <td>{{number_format($bidder->bid_amount, 2)}}</td>
-                    <td>{{date('Y-m-d H:i:s a', strtotime($bidder->created_at))}}</td>
+                    <td colspan="4" class="text-center align-middle">
+                        -NO BIDDERS-
+                    </td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
 
