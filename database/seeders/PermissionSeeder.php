@@ -26,7 +26,9 @@ class PermissionSeeder extends Seeder
                 'auction access'    => 'Allow user to access aution list and details.',
                 'auction create'    => 'Allow user to create auction.',
                 'auction edit'      => 'Allow user to update auction details.',
-                'auction delete'    => 'Allow user to delete auction.'
+                'auction delete'    => 'Allow user to delete auction.',
+                'auction export'    => 'Allow user to export auction details.',
+                'auction print'     => 'Allow user to print auction details.',
             ],
             'Items' => [
                 'item access'   => 'Allow user to access item list and details',

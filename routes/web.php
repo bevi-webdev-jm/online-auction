@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('auction/{id}/edit', [AuctionController::class, 'edit'])->name('auction.edit')->middleware('permission:auction edit');
         Route::post('auction/{id}', [AuctionController::class, 'update'])->name('auction.update')->middleware('permission:auction edit');
+
+        Route::get('auction-export/{id}', [AuctionController::class, 'export'])->name('auction.export')->middleware('permission:auction export');
+        Route::get('auction-print/{id}', [AuctionController::class, 'printPdf'])->name('auction.print')->middleware('permission:auction print');
     });
 
     // ITEMS ROUTES

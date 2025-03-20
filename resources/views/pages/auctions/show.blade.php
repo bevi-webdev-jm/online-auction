@@ -66,6 +66,20 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">BIDDINGS</h3>
+                <div class="card-tools">
+                    @can('auction print')
+                        <a href="{{route('auction.print', encrypt($auction->id))}}" class="btn btn-danger btn-xs">
+                            <i class="fa fa-file-pdf"></i>
+                            PRINT PDF
+                        </a>
+                    @endcan
+                    @can('auction export')
+                        <a href="{{route('auction.export', encrypt($auction->id))}}" class="btn btn-success btn-xs">
+                            <i class="fa fa-file-excel"></i>
+                            EXPORT
+                        </a>
+                    @endcan
+                </div>
             </div>
             <div class="card-body p-0 table-responsive">
                 <table class="table table-sm table-bordered">
@@ -88,7 +102,7 @@
                 </table>
             </div>
             <div class="card-footer">
-
+                
             </div>
         </div>
     </div>
