@@ -69,6 +69,22 @@
             font-size: 30px !important;
             padding-right: 110px !important;
         }
+
+        .signature-field {
+            height: 50px !important;
+            text-align: center !important;
+            vertical-align: bottom;
+        }
+
+        .signature-field small {
+            display: inline-block;
+            border-top: 1px solid gray;
+            width: 90%;
+        }
+        .signatory-title {
+            vertical-align: middle;
+            width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -161,23 +177,26 @@
         </tbody>
     </table>
 
-    <table class="table table sm">
+    <table class="table table-sm">
         <thead>
             <tr>
-                <th colspan="4" class="bg-gray">BIDDERS</th>
+                <th colspan="4" class="bg-gray"> TOP BIDDERS</th>
             </tr>
             <tr>
                 <th class="text-center">#</th>
                 <th>NAME</th>
                 <th>BID AMOUNT</th>
-                <th>TIMESTAMP</th>
+                <th>BID TIMESTAMP</th>
             </tr>
         </thead>
         <tbody>
             @php
-                $bidders = $auction->biddings()
+
+                $bidders = $auction->biddings()->selectRaw('MAX(bid_amount) as bid_amount, user_id, created_at')
+                    ->groupBy('user_id', 'created_at')
                     ->orderBy('bid_amount', 'DESC')
                     ->orderBy('created_at', 'ASC')
+                    ->limit(2)
                     ->get();
 
             @endphp
@@ -198,6 +217,40 @@
                 </tr>
             @endif
         </tbody>
+    </table>
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th class="bg-gray" colspan="2">SIGNATORIES</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td class="signatory-title">
+                    AUCTION WINNER
+                </td>
+                <td class="signature-field">
+                    <small>signature over printed name</small>
+                </td>
+            </tr>
+            <tr>
+                <td class="signatory-title">
+                    AUCTION COMMITTEE CHAIR
+                </td>
+                <td class="signature-field">
+                    <small>signature over printed name</small>
+                </td>
+            </tr>
+            <tr>
+                <td class="signatory-title">
+                    FINANCE
+                </td>
+                <td class="signature-field">
+                    <small>signature over printed name</small>
+                </td>
+            </tr>
+        </thead>
     </table>
 
 </body>
