@@ -63,6 +63,14 @@
                             {{$auction->end}} {{$auction->end_time}}
                         </span>
                     </li>
+                    <li class="list-group-item py-1">
+                        <b>
+                            MINIMUM BID:
+                        </b>
+                        <span class="float-right">
+                            {{number_format($auction->min_bid, 2)}}
+                        </span>
+                    </li>
                 </ul>
 
                 <hr>

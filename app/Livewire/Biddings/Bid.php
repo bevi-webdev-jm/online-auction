@@ -5,6 +5,9 @@ namespace App\Livewire\Biddings;
 use Livewire\Component;
 use App\Models\Bidding;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\BidNotification;
+
 class Bid extends Component
 {
     public $auction;
@@ -49,6 +52,9 @@ class Bid extends Component
         activity('bid')
             ->performedOn($bidding)
             ->log(':causer.name placed a '.number_format($this->bid_amount, 2).' bid on '.$this->auction->auction_code);
+
+        // Notification
+        Notification::send(auth()->user(), new BidNotification($bidding));
     }
 
     public function checkDuplicateBid() {

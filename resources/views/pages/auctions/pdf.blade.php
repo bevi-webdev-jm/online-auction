@@ -67,7 +67,23 @@
         }
         .header-title {
             font-size: 30px !important;
-            padding-right: 110px !important;
+            /* padding-right: 110px !important; */
+        }
+
+        .signature-field {
+            height: 50px !important;
+            text-align: center !important;
+            vertical-align: bottom;
+        }
+
+        .signature-field small {
+            display: inline-block;
+            border-top: 1px solid gray;
+            width: 90%;
+        }
+        .signatory-title {
+            vertical-align: middle;
+            width: 300px;
         }
     </style>
 </head>
@@ -80,7 +96,7 @@
                     <img src="{{public_path('assets/images/BEVI.jpg')}}" alt="logo" class="logo">
                 </th>
                 <th class="header-title text-center align-middle">
-                    ONLINE AUCTION
+                    ACKNOWLEDGEMENT RECEIPT
                 </th>
             </tr>
         </thead>
@@ -161,23 +177,27 @@
         </tbody>
     </table>
 
-    <table class="table table sm">
+    <table class="table table-sm">
         <thead>
             <tr>
-                <th colspan="4" class="bg-gray">BIDDERS</th>
+                <th colspan="5" class="bg-gray"> TOP BIDDERS</th>
             </tr>
             <tr>
                 <th class="text-center">#</th>
                 <th>NAME</th>
                 <th>BID AMOUNT</th>
-                <th>TIMESTAMP</th>
+                <th>BID TIMESTAMP</th>
+                <th>SIGNATURE</th>
             </tr>
         </thead>
         <tbody>
             @php
-                $bidders = $auction->biddings()
+
+                $bidders = $auction->biddings()->selectRaw('MAX(bid_amount) as bid_amount, user_id, created_at')
+                    ->groupBy('user_id', 'created_at')
                     ->orderBy('bid_amount', 'DESC')
                     ->orderBy('created_at', 'ASC')
+                    ->limit(2)
                     ->get();
 
             @endphp
@@ -188,16 +208,45 @@
                         <td>{{$bidder->user->name}}</td>
                         <td>{{number_format($bidder->bid_amount, 2)}}</td>
                         <td>{{date('Y-m-d H:i:s a', strtotime($bidder->created_at))}}</td>
+                        <td></td>
                     </tr>
                 @endforeach
             @else
                 <tr>
-                    <td colspan="4" class="text-center align-middle">
+                    <td colspan="5" class="text-center align-middle">
                         -NO BIDDERS-
                     </td>
                 </tr>
             @endif
         </tbody>
+    </table>
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th class="bg-gray" colspan="2">SIGNATORIES</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td class="signatory-title">
+                    COMMITTEE CHAIRPERSON
+                </td>
+                <td class="signature-field">
+                    ROLANDO CAGA
+                    <small>signature over printed name</small>
+                </td>
+            </tr>
+            <tr>
+                <td class="signatory-title">
+                    FINANCE
+                </td>
+                <td class="signature-field">
+                    ARLENE TRINIDAD
+                    <small>signature over printed name</small>
+                </td>
+            </tr>
+        </thead>
     </table>
 
 </body>
