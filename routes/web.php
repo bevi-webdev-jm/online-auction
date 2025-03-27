@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('company/{id}', [CompanyController::class, 'show'])->name('company.show');
 
         Route::get('company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit')->middleware('permission:company edit');
-        Route::post('company/{id}', [CompanyController::class, 'update'])->name('conpany.update')->middleware('permission:company edit');
+        Route::post('company/{id}', [CompanyController::class, 'update'])->name('company.update')->middleware('permission:company edit');
     });
 
     // ROLES ROUTES
