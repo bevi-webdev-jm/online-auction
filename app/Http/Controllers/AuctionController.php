@@ -19,10 +19,24 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 class AuctionController extends Controller
 {
     public function index(Request $request) {
+        $search = trim($request->get('search'));
+
         $auctions = Auction::orderBy('created_at', 'DESC')
+            ->when(!empty($search), function($query) use($search) {
+                $query->where('auction_code', 'like', '%'.$search.'%')
+                    ->orWhere('status' , 'like', '%'.$search.'%')
+                    ->orWhere('start', 'like', '%'.$search.'%')
+                    ->orWhere('end', 'like', '%'.$search.'%')
+                    ->orWhereHas('item', function($qry) use($search) {
+                        $qry->where('item_number', 'like', '%'.$search.'%')
+                            ->orWhere('name', 'like', '%'.$search.'%')
+                            ->orWhere('brand', 'like', '%'.$search.'%');
+                    });
+            })
             ->paginate(10)->appends(request()->query());
 
         return view('pages.auctions.index')->with([
+            'search' => $search,
             'auctions' => $auctions
         ]);
     }

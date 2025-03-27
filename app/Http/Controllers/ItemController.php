@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
     public function index(Request $request) {
+        $search = trim($request->get('search'));
+
         $items = Item::orderBy('item_number', 'DESC')
+            ->when(!empty($search), function($query) use($search) {
+                $query->where('item_number', 'like', '%'.$search.'%')
+                    ->orWhere('name', 'like', '%'.$search.'%')
+                    ->orWhere('brand', 'like', '%'.$search.'%');
+            })
             ->paginate(10)->appends(request()->query());
 
         return view('pages.items.index')->with([
+            'search' => $search,
             'items' => $items
         ]);
     }
