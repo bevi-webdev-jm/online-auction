@@ -53,8 +53,12 @@ class Bid extends Component
             ->performedOn($bidding)
             ->log(':causer.name placed a '.number_format($this->bid_amount, 2).' bid on '.$this->auction->auction_code);
 
-        // Notification
-        Notification::send(auth()->user(), new BidNotification($bidding));
+        try {
+            // Notification
+            Notification::send(auth()->user(), new BidNotification($bidding));
+        } catch(\Exception $e) {
+
+        }
     }
 
     public function checkDuplicateBid() {

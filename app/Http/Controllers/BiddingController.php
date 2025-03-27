@@ -31,4 +31,14 @@ class BiddingController extends Controller
             'bidders' => $bidders
         ]);
     }
+
+    public function my_bids() {
+        $biddings = Bidding::orderBy('created_at', 'DESC')
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10);
+
+        return view('pages.biddings.mybid')->with([
+            'biddings' => $biddings
+        ]);
+    }
 }
