@@ -20,7 +20,7 @@ class HomeController extends Controller
     }
 
     public function welcome() {
-        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days
+        $auctions =  Auction::where('end', '>=', date('Y-m-d', strtotime('-2 days'))) // Auctions that ended in the last 2 days  up to latest
             ->whereNotNull('status')
             ->orderBy('start', 'ASC')
             ->orderBy('start_time', 'ASC')

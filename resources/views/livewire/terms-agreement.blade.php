@@ -9,7 +9,9 @@
             <div class="card-body">
                 <div class="row">
                     @foreach($auctions as $auction)
-                        @if(($auction->restrict_to_company_only && $auction->company_id == auth()->user()->company_id) || empty($auction->restrict_to_company_only) || auth()->user()->hasRole('superadmin'))
+                        @if(
+                                (!empty($auction->restrict_to_company_only) && $auction->company_id == auth()->user()->company_id || empty($auction->restrict_to_company_only))
+                            )
                             <div class="col-lg-4 text-center">
                                 <livewire:auctions.tab :auction="$auction"/>
                             </div>

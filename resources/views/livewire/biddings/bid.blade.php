@@ -32,7 +32,12 @@
         </div>
     @endif
 
-    @if(((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit)) && $auction->status == 'OPEN')
+    @if(
+            ((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit)) 
+            && $auction->status == 'OPEN'
+            && (!empty($auction->restrict_to_company_only) && $auction->company_id == auth()->user()->company_id || empty($auction->restrict_to_company_only))
+        )
+
         <hr>
         <h4 class="mb-0">PLACE YOU BID</h4>
 

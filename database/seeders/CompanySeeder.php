@@ -19,6 +19,7 @@ class CompanySeeder extends Seeder
             'PBB',
             'BEVM',
             'OSP',
+            'BREEDWINNER',
         ];
 
         foreach($companies_arr as $name) {
