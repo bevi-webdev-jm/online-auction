@@ -300,6 +300,13 @@ return [
 
     'menu' => [
         [
+            'text'      => 'MyBids',
+            'url'       => 'my-bid',
+            'icon'      => 'fas fa-fw fa-gavel',
+            'can'       => 'bidding access',
+            'active'    => ['my-bid']
+        ],
+        [
             'text'      => 'Auctions',
             'url'       => 'auctions',
             'icon'      => 'fas fa-fw fa-gavel',

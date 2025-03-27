@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'permission:bidding access'], function() {
         Route::get('bidding/{id}', [BiddingController::class, 'index'])->name('bidding.index');
         Route::get('bidding/{id}/list', [BiddingController::class, 'list'])->name('bidding.list');
+        Route::get('my-bid', [BiddingController::class, 'my_bids'])->name('bidding.mybid');
     });
 
     // AUCTIONS ROUTES
