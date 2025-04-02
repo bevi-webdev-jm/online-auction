@@ -38,7 +38,7 @@ class BidNotification extends Notification
     {
         return (new MailMessage)
             ->from('notify@bevi.com.ph', 'ONLINE AUCTION')
-            ->subject('You have placed yout bid!.')
+            ->subject('You have placed your bid!.')
             ->greeting('Hello! '.$notifiable->name)
             ->line('You have successfully placed your '.number_format($this->bidding->bid_amount, 2).' bid on auction ['.$this->bidding->auction->auction_code.'].')
             ->action('View Details', url('/bidding/'.encrypt($this->bidding->auction_id)))
