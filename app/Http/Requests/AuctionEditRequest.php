@@ -55,7 +55,6 @@ class AuctionEditRequest extends FormRequest
             'start' => [
                 'required',
                 'date',
-                'after_or_equal:today' // Prevents setting past start dates
             ],
             'start_time' => [
                 'required',
