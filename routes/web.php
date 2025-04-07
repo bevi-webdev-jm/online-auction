@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::get('auction-export/{id}', [AuctionController::class, 'export'])->name('auction.export')->middleware('permission:auction export');
         Route::get('auction-print/{id}', [AuctionController::class, 'printPdf'])->name('auction.print')->middleware('permission:auction print');
+
+        Route::get('auction-send-winner/{id}', [AuctionController::class, 'sendWinnerNotification'])->name('auction.notification')->middleware('permission:auction print');
     });
 
     // ITEMS ROUTES

@@ -72,6 +72,10 @@
                             <i class="fa fa-file-pdf"></i>
                             PRINT PDF
                         </a>
+                        <a href="{{route('auction.notification', encrypt($auction->id))}}" class="btn btn-info btn-xs">
+                            <i class="fa fa-send"></i>
+                            SEND NOTIFICATION
+                        </a>
                     @endcan
                     @can('auction export')
                         <a href="{{route('auction.export', encrypt($auction->id))}}" class="btn btn-success btn-xs">

@@ -16,6 +16,9 @@ use App\Exports\AuctionExport;
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\AuctionWinnerNotification;
+
 class AuctionController extends Controller
 {
     public function index(Request $request) {
@@ -222,5 +225,22 @@ class AuctionController extends Controller
         ]);
 
         return $pdf->stream('auction-'.$auction->auction_code.'-'.time().'.pdf');
+    }
+
+    public function sendWinnerNotification($id) {
+        $auction = Auction::findOrFail(decrypt($id));
+        $auction_winner = $auction->auction_winner;
+
+        if(!empty($auction_winner->bidding->user)) {
+            Notification::send($auction_winner->bidding->user, new AuctionWinnerNotification($auction));
+
+            return back()->with([
+                'message_success' => 'Notification sent successfully',
+            ]);
+        }
+
+        return back()->with([
+            'message_error' => 'Notification failed',
+        ]);
     }
 }
