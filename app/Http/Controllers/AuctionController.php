@@ -19,6 +19,8 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\AuctionWinnerNotification;
 
+use Illuminate\Support\Facades\Log;
+
 class AuctionController extends Controller
 {
     public function index(Request $request) {
@@ -232,7 +234,11 @@ class AuctionController extends Controller
         $auction_winner = $auction->auction_winner;
 
         if(!empty($auction_winner->bidding->user)) {
-            Notification::send($auction_winner->bidding->user, new AuctionWinnerNotification($auction));
+            try {
+                Notification::send($auction_winner->bidding->user, new AuctionWinnerNotification($auction));
+            } catch(\Exception $e) {
+                Log::error('Notification Failed: '.$e->getMessage());
+            }
 
             return back()->with([
                 'message_success' => 'Notification sent successfully',
