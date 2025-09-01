@@ -46,7 +46,7 @@ class AuctionWinnerNotification extends Notification
         $filename = 'auction-' . $this->auction->auction_code . '-' . time() . '.pdf';
 
         return (new MailMessage)
-            ->from('notify@bevi.com.ph', 'ONLINE AUCTION')
+            ->from('notify@bevi.ph', 'ONLINE AUCTION')
             ->subject('🎉 Congratulations! You Won the Auction')
             ->greeting('Hi ' . $notifiable->name . ',')
             ->line('We’re excited to inform you that you’ve successfully won the auction with the code: **' . $this->auction->auction_code . '**.')
