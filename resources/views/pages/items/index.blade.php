@@ -50,6 +50,7 @@
                                 <th>ITEM NUMBER</th>
                                 <th>NAME</th>
                                 <th>BRAND</th>
+                                <th>STATUS</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -64,6 +65,22 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         {{$item->brand}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        @php
+                                            $auctions = $item->auctions;
+                                            $status = 0;
+                                            foreach($auctions as $auction) {
+                                                if(!empty($auction->auction_winner)) {
+                                                    $status = 1;
+                                                }
+                                            }
+                                        @endphp
+                                        @if($status)
+                                            <span class="badge badge-danger">SOLD</span>
+                                        @else
+                                            <span class="badge badge-success">AVAILABLE</span>
+                                        @endif
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
                                         <a href="{{route('item.show', encrypt($item->id, 'roles'))}}" class="btn btn-info btn-xs mb-0 ml-0">
