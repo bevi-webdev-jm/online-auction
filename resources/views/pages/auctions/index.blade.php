@@ -35,7 +35,7 @@
                     </div>
                 </div>
             {{ html()->form()->close() }}
-            
+
             <div class="row">
                 <div class="col-12 table-responsive p-1 bg-gray rounded">
                     <table class="table table-sm table-striped table-hover bg-white mb-0">
@@ -58,7 +58,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         [{{$auction->item->item_number}}] {{$auction->item->name}}
-                                    </td>
+                                    </td> 
                                     <td class="align-middle text-center">
                                         {{$auction->start}} {{$auction->start_time}}
                                     </td>
@@ -69,7 +69,11 @@
                                         {{number_format($auction->min_bid, 2)}}
                                     </td>
                                     <td class="align-middle text-center">
-                                        {{$auction->status ?? '-'}}
+                                        @if(!empty($auction->auction_winner))
+                                            SOLD
+                                        @else
+                                            {{$auction->status ?? '-'}}
+                                        @endif
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
                                         <a href="{{route('auction.show', encrypt($auction->id, 'auctions'))}}" class="btn btn-info btn-xs mb-0 ml-0">
@@ -83,7 +87,7 @@
                                                     EDIT
                                                 </a>
                                             @endcan
-                                        
+
                                             @can('auction delete')
                                                 <a href="#" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($auction->id)}}">
                                                     <i class="fa fa-trash-alt"></i>

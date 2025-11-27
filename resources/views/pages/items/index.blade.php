@@ -20,6 +20,12 @@
                             NEW ITEM
                         </a>
                     @endcan
+                    @can('item upload')
+                        <a href="{{route('item.upload')}}" class="btn btn-info btn-xs">
+                            <i class="fa fa-upload"></i>
+                            UPLOAD ITEM
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -35,7 +41,7 @@
                     </div>
                 </div>
             {{ html()->form()->close() }}
-            
+
             <div class="row">
                 <div class="col-12 table-responsive p-1 bg-gray rounded">
                     <table class="table table-sm table-striped table-hover bg-white mb-0">

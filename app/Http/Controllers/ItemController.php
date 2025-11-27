@@ -43,4 +43,8 @@ class ItemController extends Controller
             'item' => $item
         ]);
     }
+
+    public function upload() {
+        return view('pages.items.upload');
+    }
 }

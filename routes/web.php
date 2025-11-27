@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\{
-    RoleController, UserController, CompanyController, 
+    RoleController, UserController, CompanyController,
     SystemLogController, ItemController, AuctionController,
     BiddingController, HomeController
 };
@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('items', [ItemController::class, 'index'])->name('item.index');
         Route::get('item/create', [ItemController::class, 'create'])->name('item.create')->middleware('permission:item create');
         Route::post('item', [ItemController::class, 'store'])->name('item.store')->middleware('permission:item create');
+
+        Route::get('item/upload', [ItemController::class, 'upload'])->name('item.upload')->middleware('permission:item upload');
 
         Route::get('item/{id}', [ItemController::class, 'show'])->name('item.show');
 
