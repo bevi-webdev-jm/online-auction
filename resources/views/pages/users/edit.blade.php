@@ -28,7 +28,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             {{ html()->label('NAME', 'name')->class(['mb-0']) }}
-                            {{ html()->input('text', 'name', $user->name)->placeholder('Name')->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('name')]); }}
+                            {{ html()->input('text', 'name', $user->name)->placeholder('Name')->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('name')]) }}
                             <small class="text-danger">{{$errors->first('name')}}</small>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             {{ html()->label('EMAIL', 'email')->class(['mb-0']) }}
-                            {{ html()->input('email', 'email', $user->email)->placeholder('Email')->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('email')]); }}
+                            {{ html()->input('email', 'email', $user->email)->placeholder('Email')->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('email')]) }}
                             <small class="text-danger">{{$errors->first('email')}}</small>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             {{ html()->label('COMPANY', 'company_id')->class(['mb-0']) }}
-                            {{ html()->select('company_id', $companies, $company_selected_id)->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('company_id')]); }}
+                            {{ html()->select('company_id', $companies, $company_selected_id)->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('company_id')]) }}
                             <small class="text-danger">{{$errors->first('company_id')}}</small>
                         </div>
                     </div>

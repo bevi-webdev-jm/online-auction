@@ -34,7 +34,8 @@ class PermissionSeeder extends Seeder
                 'item access'   => 'Allow user to access item list and details',
                 'item create'   => 'Allow user to create item.',
                 'item edit'     => 'Allow user to edit item details.',
-                'item delete'   => 'Allow user to delete item.'
+                'item delete'   => 'Allow user to delete item.',
+                'item upload'   => 'Allow user to upload item.',
             ],
             'Companies' => [
                 'company access'    => 'Allow user to access company list and details.',
