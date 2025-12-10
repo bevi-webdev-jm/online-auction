@@ -14,7 +14,10 @@ class ItemController extends Controller
             ->when(!empty($search), function($query) use($search) {
                 $query->where('item_number', 'like', '%'.$search.'%')
                     ->orWhere('name', 'like', '%'.$search.'%')
-                    ->orWhere('brand', 'like', '%'.$search.'%');
+                    ->orWhere('brand', 'like', '%'.$search.'%')
+                    ->orWhereHas('specifications', function($qry) use($search) {
+                        $qry->where('value', 'like', '%'.$search.'%');
+                    });
             })
             ->paginate(10)->appends(request()->query());
 
