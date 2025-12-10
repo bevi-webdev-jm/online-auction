@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-            
+
             <div class="row">
                 <div class="col-12 table-responsive p-1 bg-gray rounded">
                     <table class="table table-sm table-striped table-hover bg-white mb-0">
@@ -46,7 +46,7 @@
                                         {{date('Y-m-d H:i:s a', strtotime($bidding->created_at))}}
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
-                                        <a href="{{route('bidding.index', encrypt($bidding->id))}}" class="btn btn-info btn-xs mb-0 ml-0">
+                                        <a href="{{route('bidding.index', encrypt($bidding->auction_id))}}" class="btn btn-info btn-xs mb-0 ml-0">
                                             <i class="fa fa-list"></i>
                                             VIEW
                                         </a>

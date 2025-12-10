@@ -52,7 +52,7 @@
         </div>
         <!--  -->
         <div class="col-lg-8">
-
+            <livewire:users.bids :user="$user"/>
         </div>
     </div>
 @stop
@@ -65,6 +65,6 @@
 
 {{-- Push extra scripts --}}
 @push('js')
-    <script> 
+    <script>
     </script>
 @endpush

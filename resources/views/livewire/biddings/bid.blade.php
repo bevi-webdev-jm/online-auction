@@ -1,7 +1,7 @@
 <div>
     @if((auth()->user()->can('bidding leader') || $auction->show_leading_bidder) && !empty($highest_bidder))
         <hr>
-        <h4>HIGEST BIDDER</h4>
+        <h4>HIGHEST BIDDER</h4>
         <div class="bg-success px-3 py-1 rounded">
             <h3 class="font-weight-bold mb-0">
                 {{$highest_bidder->user->name}}
@@ -33,7 +33,7 @@
     @endif
 
     @if(
-            ((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit)) 
+            ((!empty($auction->bid_limit) && $user_biddings->count() < $auction->bid_limit) || empty($auction->bid_limit))
             && $auction->status == 'OPEN'
             && (!empty($auction->restrict_to_company_only) && $auction->company_id == auth()->user()->company_id || empty($auction->restrict_to_company_only))
         )
@@ -79,7 +79,7 @@
                         <li>Payments must be completed within two (2) days.</li>
                         <li>Failure to pay within the timeframe may result in the item being awarded to the next highest bidder.</li>
                     </ul>
-                    
+
                     <strong>Item Pickup</strong>
                     <ul>
                         <li>Upon successful payment, the item will be available for pickup at IT Department.</li>
@@ -94,7 +94,7 @@
                 </div>
             </div>
         @endif
-        
+
         <div class="bg-gray pt-2 px-3 mt-1 rounded">
             <div class="row">
                 <div class="col-lg-6">
@@ -107,12 +107,20 @@
             </div>
         </div>
 
-        <div class="mt-1">
-            <a href="#" class="btn btn-primary btn-lg btn-flat" wire:click.prevent="PlaceBid">
-                <i class="fas fa-thumbs-up fa-lg mr-2"></i>
-                PLACE MY BID
-            </a>
+        <div class="mt-1" wire:target="PlaceBid">
+            <div wire:loading.remove>
+                <a href="#" class="btn btn-primary btn-lg btn-flat" wire:click.prevent="PlaceBid">
+                    <i class="fas fa-thumbs-up fa-lg mr-2"></i>
+                    PLACE MY BID
+                </a>
+            </div>
+            <div wire:loading>
+                <a href="#" class="btn btn-primary btn-lg btn-flat">
+                    <i class="fas fa-spinner fa-spin fa-lg mr-2"></i>
+                    PLACING BID...
+                </a>
+            </div>
         </div>
     @endif
-    
+
 </div>
