@@ -27,7 +27,11 @@
                         <tbody class="text-center">
                             @foreach($biddings as $bidding)
                                 <tr>
-                                    <td>{{$bidding->auction->auction_code}}</td>
+                                    <td>
+                                        <a href="{{ route('auction.show', encrypt($bidding->auction_id)) }}">
+                                            {{$bidding->auction->auction_code}}
+                                        </a>
+                                    </td>
                                     <td>{{number_format($bidding->bid_amount, 2)}}</td>
                                     <td>{{date('F j, Y H:i:s a', strtotime($bidding->created_at))}}</td>
                                 </tr>
